@@ -1,5 +1,6 @@
 package hebertesteves.screenmatch;
 
+import hebertesteves.screenmatch.model.DadosEpisodio;
 import hebertesteves.screenmatch.model.DadosSerie;
 import hebertesteves.screenmatch.service.ConsumoApi;
 import hebertesteves.screenmatch.service.ConverteDados;
@@ -22,8 +23,16 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		// json = consumoApi.obterDados("https://coffee.alexflipnote.dev/random.json");
 		System.out.println(json);
 
+		System.out.println();
+
 		ConverteDados conversor = new ConverteDados();
 		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 		System.out.println(dados);
+
+		System.out.println();
+
+		json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=6585022c");
+		DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
+		System.out.println(dadosEpisodio);
 	}
 }
