@@ -1,5 +1,6 @@
 package hebertesteves.screenmatch.principal;
 
+import hebertesteves.screenmatch.model.DadosEpisodio;
 import hebertesteves.screenmatch.model.DadosSerie;
 import hebertesteves.screenmatch.model.DadosTemporada;
 import hebertesteves.screenmatch.service.ConsumoApi;
@@ -33,6 +34,19 @@ public class Principal {
 			temporadas.add(dadosTemporada);
 		}
 
-		temporadas.forEach(System.out::println);
+        temporadas.forEach(System.out::println);
+        System.out.println();
+
+        /*
+        for (int i = 0; i < dados.totalTemporadas(); i++) {
+            List<DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+           for (int j = 0; j < episodiosTemporada.size(); j++) {
+                System.out.println(episodiosTemporada.get(j).titulo());
+           }
+        }
+        System.out.println();
+         */
+
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
     }
 }
