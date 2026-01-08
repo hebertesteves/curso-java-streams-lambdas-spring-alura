@@ -7,6 +7,7 @@ import hebertesteves.screenmatch.service.ConsumoApi;
 import hebertesteves.screenmatch.service.ConverteDados;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -48,5 +49,17 @@ public class Principal {
          */
 
         temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+
+        System.out.println("\n");
+
+        List<String> nomes = Arrays.asList("Jacque", "Iasmin", "Paulo", "Rodrigo", "Nico");
+
+        nomes.stream()
+                .sorted()
+                .limit(3)
+                .filter(n -> n.startsWith("N"))
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
+
     }
 }
