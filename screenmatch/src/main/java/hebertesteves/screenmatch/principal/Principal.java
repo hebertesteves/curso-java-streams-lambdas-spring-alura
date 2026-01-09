@@ -3,9 +3,11 @@ package hebertesteves.screenmatch.principal;
 import hebertesteves.screenmatch.model.DadosEpisodio;
 import hebertesteves.screenmatch.model.DadosSerie;
 import hebertesteves.screenmatch.model.DadosTemporada;
+import hebertesteves.screenmatch.model.Episodio;
 import hebertesteves.screenmatch.service.ConsumoApi;
 import hebertesteves.screenmatch.service.ConverteDados;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -71,6 +73,14 @@ public class Principal {
                 .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream()
+                        .map(d -> new Episodio(t.numero(), d)))
+                        .collect(Collectors.toList());
+
+        System.out.println("\n");
+        episodios.forEach(System.out::println);
 
     }
 }
