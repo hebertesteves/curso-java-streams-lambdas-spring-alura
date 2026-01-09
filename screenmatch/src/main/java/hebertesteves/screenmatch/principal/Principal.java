@@ -6,10 +6,8 @@ import hebertesteves.screenmatch.model.DadosTemporada;
 import hebertesteves.screenmatch.service.ConsumoApi;
 import hebertesteves.screenmatch.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Principal {
     private Scanner sc = new Scanner(System.in);
@@ -50,15 +48,28 @@ public class Principal {
 
         temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
-        System.out.println("\n");
+//        System.out.println("\n");
+//
+//        List<String> nomes = Arrays.asList("Jacque", "Iasmin", "Paulo", "Rodrigo", "Nico");
+//
+//        nomes.stream()
+//                .sorted()
+//                .limit(3)
+//                .filter(n -> n.startsWith("N"))
+//                .map(String::toUpperCase)
+//                .forEach(System.out::println);
 
-        List<String> nomes = Arrays.asList("Jacque", "Iasmin", "Paulo", "Rodrigo", "Nico");
+        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
+                        .flatMap(t -> t.episodios().stream())
+                                .collect(Collectors.toList());
 
-        nomes.stream()
-                .sorted()
-                .limit(3)
-                .filter(n -> n.startsWith("N"))
-                .map(String::toUpperCase)
+
+        System.out.println("\nTop 5 episódios");
+
+        dadosEpisodios.stream()
+                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .limit(5)
                 .forEach(System.out::println);
 
     }
