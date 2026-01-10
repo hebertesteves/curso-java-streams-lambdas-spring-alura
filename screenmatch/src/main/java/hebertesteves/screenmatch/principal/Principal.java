@@ -131,5 +131,16 @@ public class Principal {
         for (Integer chave : avaliacoesPorTemporada.keySet()) {
             System.out.println("Temporada: " + chave + ", Avaliação: " + String.format("%.2f", avaliacoesPorTemporada.get(chave)));
         }
+
+        System.out.println();
+
+        DoubleSummaryStatistics est = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
+
+        System.out.println("Média da avaliação dos episódios: " + String.format("%.2f", est.getAverage()));
+        System.out.println("Quantidade de episódios avaliados: " + est.getCount());
+        System.out.println("Episódio com a menor avaliação: " + String.format("%.2f", est.getMin()));
+        System.out.println("Episódio com a maior avaliação: " + String.format("%.2f", est.getMax()));
     }
 }
