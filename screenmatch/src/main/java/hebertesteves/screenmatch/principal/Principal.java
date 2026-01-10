@@ -21,6 +21,8 @@ public class Principal {
     private ConverteDados conversor = new ConverteDados();
 
     public void exibeMenu() {
+        Locale.setDefault(Locale.US);
+
         System.out.print("Digite o nome da série para busca: ");
         var nomeSerie = sc.nextLine();
         var json = consumoApi.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
@@ -119,5 +121,15 @@ public class Principal {
                                 ", Data de Lançamento: " + formatador.format(e.getDataLancamento())
                 ));
 
+        System.out.println();
+
+        Map<Integer, Double> avaliacoesPorTemporada = episodios.stream()
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(Collectors.groupingBy(Episodio::getTemporada,
+                        Collectors.averagingDouble(Episodio::getAvaliacao)));
+
+        for (Integer chave : avaliacoesPorTemporada.keySet()) {
+            System.out.println("Temporada: " + chave + ", Avaliação: " + String.format("%.2f", avaliacoesPorTemporada.get(chave)));
+        }
     }
 }
