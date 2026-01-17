@@ -43,7 +43,7 @@ Durante o curso, foram estudados os seguintes tópicos:
 
 - **Curso:** Java: trabalhando com lambdas, streams e Spring Framework  
 - **Plataforma:** Alura  
-- **Carga horária:** —  
+- **Carga horária:** 14h  
 
 📎 **Certificado:** [Acessar certificado](https://cursos.alura.com.br/certificate/27e5500e-0537-4bdf-be5a-36cb1188a949?lang)
 
